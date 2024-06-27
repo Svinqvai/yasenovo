@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регистрирай Участник</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Редактирай Участник</h1>
+    <form action="#" th:action="@{/saveOrUpdateParticipant}" th:object="${participant}" method="post" class="mt-4">
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}">
+            <label for="name">Име:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control"/>
+            <label for="name">Номер:</label>
+            <input type="text" id="number" th:field="*{number}" class="form-control"/>
+            <label for="name">Сектор:</label>
+            <input type="text" id="sector" th:field="*{sector}" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Запази</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

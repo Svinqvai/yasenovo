@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Учасници</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    .navbar {
+    background-color: #003366 !important; /* Dark blue background */
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+    color: #ffffff; /* White text */
+    padding: 1rem 2rem; /* Equal size padding for uniform item size */
+    }
+    .navbar-brand:hover, .navbar-nav .nav-link:hover {
+    color: #cccccc; /* Lighter text on hover */
+    }
+    .navbar-nav .nav-link {
+    flex: 1; /* Ensure all items take equal width */
+    text-align: center; /* Center-align text */
+    }
+    </style>
+</head>
+<body>
+
+<!-- Include menu from external file -->
+<div th:replace="~{menu :: menu}"></div>
+
+<div class="container-fluid" style="margin-top: 20px">
+
+    <h2 class="text-center mb-4">Учасници</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Име</th>
+            <th>Номер</th>
+            <th>Сектор</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the list of participants -->
+        <tr th:each="participant : ${participants}">
+            <td th:text="${participant.id}">ID</td>
+            <td th:text="${participant.name}">Име</td>
+            <td th:text="${participant.number}">Номер</td>
+            <td>
+                <!-- Display the sector if set, otherwise show a button to draw the sector -->
+                <span th:if="${participant.sector} != null" th:text="${participant.sector}"></span>
+                <form th:if="${participant.sector} == null">
+                    <input type="hidden" name="participantId" th:value="${participant.id}"/>
+                    <button type="submit" class="btn btn-success btn-sm" th:attr="formaction=@{/drawSector}">Изтегли Сектор</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/participant/edit/{id}(id=${participant.id})}" class="btn btn-primary btn-sm">Редактирай</a>
+                <a th:href="@{/participant/delete/{id}(id=${participant.id})}" class="btn btn-danger btn-sm ml-2">Изтрий</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tr>
+            <td><a href="/register" class="btn btn-success">Добави участник</a></td>
+            <td>
+                <form th:action="@{/shuffleParticipants}" method="post">
+                    <button type="submit" class="btn btn-success">Изтегли номера</button>
+                </form>
+            </td>
+
+            <td>
+                <form th:action="@{/clearNumbers}" method="post">
+                    <button type="submit" class="btn btn-warning">Премахни номерата</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/clearSectors}" method="post">
+                    <button type="submit" class="btn btn-warning">Премахни секторите</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/truncateParticipants}" method="post">
+                    <button type="submit" class="btn btn-danger">Изтрий Всичко</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
