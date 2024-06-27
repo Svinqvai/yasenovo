@@ -26,6 +26,11 @@ public class ParticipantController {
         return "index";
     }
 
+    @GetMapping("/contact_us")
+    public String contactsPage() {
+        return "contact_us";
+    }
+
     @GetMapping("/register")
     public String registerParticipant(Model model) {
         model.addAttribute("participant", new Participant());
@@ -41,7 +46,7 @@ public class ParticipantController {
             participant.setSector(null);
         }
         participantRepository.save(participant);
-        return "redirect:/display";
+        return "redirect:/race";
     }
 
     @GetMapping("/race")
@@ -59,7 +64,7 @@ public class ParticipantController {
             participantRepository.save(participants.get(i));
             model.addAttribute("participants", participants); // Update the model with shuffled list
         }
-        return "redirect:/display";
+        return "redirect:/race";
     }
 
     @PostMapping("/clearNumbers")
@@ -69,9 +74,9 @@ public class ParticipantController {
         for (int i = 0; i < participants.size(); i++) {
             participants.get(i).setNumber(null);
             participantRepository.save(participants.get(i));
-            model.addAttribute("participants", participants);
+            model.addAttribute("participa   nts", participants);
         }
-        return "redirect:/display";
+        return "redirect:/race";
     }
     @PostMapping("/clearSectors")
     public String clearSectors(Model model) {
@@ -82,7 +87,7 @@ public class ParticipantController {
             participantRepository.save(participants.get(i));
             model.addAttribute("participants", participants);
         }
-        return "redirect:/display";
+        return "redirect:/race";
     }
 
     @GetMapping("/participant/edit/{id}")
@@ -95,13 +100,13 @@ public class ParticipantController {
     @GetMapping("/participant/delete/{id}")
     public String deleteParticipant(@PathVariable int id) {
         participantService.deletePrincipalById(id);
-        return "redirect:/display";
+        return "redirect:/race";
     }
 
     @GetMapping("/drawSector")
     public String drawSector(@RequestParam("participantId") Long participantId) {
         participantService.updateParticipantSector(participantId);
-        return "redirect:/display";
+        return "redirect:/race";
     }
 //======
 @PersistenceContext
@@ -110,7 +115,7 @@ private EntityManager entityManager;
     @Transactional
     public String truncateParticipants() {
         entityManager.createNativeQuery("TRUNCATE TABLE participant").executeUpdate();
-        return "redirect:/display";
+        return "redirect:/race";
     }
 
 }

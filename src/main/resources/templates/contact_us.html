@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регистрирай Участник</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar {
+        background-color: #003366 !important; /* Dark blue background */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+        color: #ffffff; /* White text */
+        padding: 1rem 2rem; /* Equal size padding for uniform item size */
+        }
+        .navbar-brand:hover, .navbar-nav .nav-link:hover {
+        color: #cccccc; /* Lighter text on hover */
+        }
+        .navbar-nav .nav-link {
+        flex: 1; /* Ensure all items take equal width */
+        text-align: center; /* Center-align text */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Include menu from external file -->
+<div th:replace="~{menu :: menu}"></div>
+<!-- Content Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Контакти:</h1>
+            <p>Телефон за връзка:0897841554</p>
+            <p>Email: yazoviryasenovo@abv.bg</p>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
